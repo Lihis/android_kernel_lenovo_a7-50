@@ -46,14 +46,14 @@
 //#define ANDROID_TOUCH_DECLARED
 
 /* Tuneables */
-#define S2W_DEFAULT             2 // 0 - off; 1 - s2w & s2s; 2 - s2s only
+#define S2W_DEFAULT             0 // 0 - off; 1 - s2w & s2s; 2 - s2s only
 #define S2W_PWRKEY_DUR          60
 #define S2W_Y_MAX               1280 // bottom border
 #define S2W_Y_MIN               0 // upper border
-#define S2W_X_MAX               720 // right border
+#define S2W_X_MAX               800 // right border
 #define S2W_X_MIN               0 // left border
 #define S2W_X_B1                240 // left border trigger
-#define S2W_X_B2                600 // right border trigger
+#define S2W_X_B2                680 // right border trigger
 
 /* Resources */
 int s2w_switch = S2W_DEFAULT;

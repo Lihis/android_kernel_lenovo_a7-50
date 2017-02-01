@@ -355,8 +355,13 @@ static int tpd_probe(struct platform_device *pdev) {
 	  	touch_type = 0;
 	  	TPD_DMESG("Generic touch panel driver\n");
 	  }
-	  	
+
+    #ifdef CONFIG_HAS_EARLYSUSPEND
+    MTK_TS_early_suspend_handler.suspend = g_tpd_drv->suspend;
+    MTK_TS_early_suspend_handler.resume = g_tpd_drv->resume;
+    register_early_suspend(&MTK_TS_early_suspend_handler);
     #endif
+#endif
 
     if (misc_register(&tpd_misc_device))
     {
@@ -422,14 +427,14 @@ static int tpd_probe(struct platform_device *pdev) {
     MTK_TS_early_suspend_handler.suspend = g_tpd_drv->suspend;
     MTK_TS_early_suspend_handler.resume = g_tpd_drv->resume;
     register_early_suspend(&MTK_TS_early_suspend_handler);
-    #ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
+	#ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
 	if ((g_tpd_drv->suspend != NULL) && (g_tpd_drv->resume != NULL)) {
 		nyx_suspend = g_tpd_drv->suspend;
 		nyx_resume  = g_tpd_drv->resume;
 		MTK_TS_early_suspend_handler.suspend = eros_suspend;
 		MTK_TS_early_suspend_handler.resume  = eros_resume;
 	}
-    #endif
+	#endif
     #endif		  
 #endif
 #ifdef CONFIG_TOUCHSCREEN_PREVENT_SLEEP
